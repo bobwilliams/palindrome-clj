@@ -6,7 +6,7 @@
 (defn two-args? [args]
   (= 2 (count args)))
 
-(defn time-to-stop [start end]
+(defn time-to-stop? [start end]
   (= 1 (compare start end)))
 
 (defn get-date-obj [date]
@@ -30,8 +30,8 @@
   "Takes a start and end dates and returns all palindromes within those bounds"
   (loop [current start
          dates []]
-    (if (time-to-stop current end) 
-      (println dates)
+    (if (time-to-stop? current end) 
+      dates
       (recur 
         (add-one-day current)
         (if (is-palindrome? current) 
@@ -43,7 +43,7 @@
   (if (two-args? args)
     (let [start (get-date-obj (first args))
           end (get-date-obj (last args))]
-      (if (time-to-stop start end)
+      (if (time-to-stop? start end)
         (println usage)
         (find-palindromes start end)))
     (println usage)))
