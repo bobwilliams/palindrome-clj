@@ -1,4 +1,5 @@
-(ns palindrome.core)
+(ns palindrome.core
+  (:gen-class))
 
 (def usage "Usage: <start-date> <end-date>.  Where start-date and end-date should be in 'MMddyyyy' format and start-date must be before, or on, end-date.")
 
@@ -30,19 +31,19 @@
   (loop [current start
          dates []]
     (if (time-to-stop current end) 
-      dates
+      (println dates)
       (recur 
         (add-one-day current)
         (if (is-palindrome? current) 
           (conj dates (get-date-str current))
-          dates)))))
+           dates)))))
 
 (defn -main [& args]
-  "A clojure attempt at our palindrome test"
+  "A clojure attempt at SPARC's palindrome test"
   (if (two-args? args)
     (let [start (get-date-obj (first args))
           end (get-date-obj (last args))]
       (if (time-to-stop start end)
-        usage
+        (println usage)
         (find-palindromes start end)))
-    usage))
+    (println usage)))
